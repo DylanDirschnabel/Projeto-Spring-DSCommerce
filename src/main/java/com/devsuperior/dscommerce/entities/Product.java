@@ -2,6 +2,7 @@ package com.devsuperior.dscommerce.entities;
 
 import java.util.HashSet;
 import java.util.Set;
+import java.util.List;
 
 import jakarta.persistence.*;
 
@@ -23,7 +24,10 @@ public class Product {
 	joinColumns = @JoinColumn(name = "product_id"),
 	inverseJoinColumns = @JoinColumn(name = "category_id"))
 	private Set<Category> categories = new HashSet<>();
-	
+
+	@OneToMany(mappedBy = "id.product")
+	private Set<OrderItem> items = new HashSet<>();
+
 	private Product() {}
 
 	public Product(Long id, String name, String description, Double price, String imgUrl) {
@@ -77,5 +81,12 @@ public class Product {
 	private Set<Category> getCategories() {
 		return categories;
 	}
-	
+
+	public Set<OrderItem> getItems() {
+		return items;
+	}
+
+	public List<Order> getProducts() {
+		return items.stream().map(x -> x.getOrder()).toList();
+	}
 }
