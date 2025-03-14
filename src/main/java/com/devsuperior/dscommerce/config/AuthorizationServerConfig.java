@@ -80,6 +80,8 @@ public class AuthorizationServerConfig {
                         .accessTokenRequestConverter(new CustomPasswordAuthenticationConverter())
                         .authenticationProvider(new CustomPasswordAuthenticationProvider(authorizationService(), tokenGenerator(), userDetailsService, passwordEncoder())));
 
+        http.oauth2ResourceServer(oauth2ResourceServer -> oauth2ResourceServer.jwt(Customizer.withDefaults()));
+
         return http.build();
 
     }
