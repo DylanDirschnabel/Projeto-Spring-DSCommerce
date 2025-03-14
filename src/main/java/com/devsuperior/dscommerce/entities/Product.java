@@ -79,7 +79,7 @@ public class Product {
 		this.imgUrl = imgUrl;
 	}
 	
-	private Set<Category> getCategories() {
+	public Set<Category> getCategories() {
 		return categories;
 	}
 
